@@ -5,18 +5,19 @@ class Node:
 
 
 class MyList:
-    def __init__(self, a):
+    def __init__(self, a = None):
         self.head = None
         tail = None
 
-        for i in a:
-            node = Node(i, None)
-            if self.head is None:
-                self.head = node
-                tail = node
-            else:
-                tail.next = node
-                tail = node
+        if a is not None:
+            for i in a:
+                node = Node(i, None)
+                if self.head is None:
+                    self.head = node
+                    tail = node
+                else:
+                    tail.next = node
+                    tail = node
 
     def showlist(self):
         node = self.head
@@ -97,6 +98,52 @@ class MyList:
         old.next = None
         return value
 
+    def even(self):
+        node = self.head
+        evenLinked = MyList()
+        tail = None
+        while node is not None:
+            if node.elem % 2 == 0:
+                n = Node(node.elem, None)
+                if evenLinked.head is None:
+                    evenLinked.head = n
+                    tail = n
+                else:
+                    tail.next = n
+                    tail = n
+            node = node.next
+        return evenLinked
+
+    def find(self, element):
+        node = self.head
+        turn = False
+        while node is not None:
+            if node.elem == element:
+                turn = True
+                break
+            else:
+                turn = False
+            node = node.next
+        return turn
+
+    def reverse(self):
+        node = self.head
+        newHead = None
+        while node is not None:
+            next = node.next
+            node.next = newHead
+            newHead = node
+            node = next
+        self.head = newHead
+
+    def sum(self):
+        node = self.head
+        sum = 0
+        while node is not None:
+            sum = sum + node.elem
+            node = node.next
+        return sum
+
 
 # Tester Class
 list1 = [1, 2, 3, 4, 5]
@@ -121,3 +168,9 @@ list2.insertAt(16, 2)
 list2.showlist()
 list2.remove(2)
 list2.showlist()
+even = list2.even()
+even.showlist()
+print(list2.find(4))
+even.reverse()
+even.showlist()
+print(even.sum())
