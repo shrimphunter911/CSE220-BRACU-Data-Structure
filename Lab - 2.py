@@ -64,6 +64,14 @@ class MyList:
             node = node.next
         return node
 
+    def count(self):
+        node = self.head
+        i = 0
+        while node is not None:
+            i += 1
+            node = node.next
+        return i
+
     def insertAt(self, newElement, index):
         node = self.head
         turn = False
@@ -144,33 +152,98 @@ class MyList:
             node = node.next
         return sum
 
+    def leftRotate(self):
+        oldHead = self.head
+
+        lastnode = self.nodeAt(self.count()-1)
+        lastnode.next = oldHead
+        self.head = oldHead.next
+        oldHead.next = None
+        
+    def rightRotate(self):
+        prevlastnode = self.nodeAt(self.count()-1)
+        futurelast = self.nodeAt(self.count()-2)
+        futurelast.next = None
+        prevlastnode.next = self.head
+        self.head = prevlastnode
+
+    def rotate(self, direction, times):
+        if direction == 'left':
+            for i in range(times):
+                self.leftRotate()
+        elif direction == 'right':
+            for i in range(times):
+                self.rightRotate()
+        else:
+            print('Night Changes - Wrong Direction')
+
+    def getindex(self, n):
+        i = 0
+        node = self.head
+        while node is not None:
+            if n == node:
+                return i
+            i += 1
+            node = node.next
+
+    def sort(self):
+        node = self.head
+        while node is not None:
+            n = node.next
+            c = node.elem
+            while n is not None:
+                if n.elem <= c:
+                    c = n.elem
+                    at = self.getindex(n)
+                n = n.next
+            if c < node.elem:
+                temp = node.elem
+                node.elem = c
+                x = self.nodeAt(at)
+                x.elem = temp
+            node = node.next
+
 
 # Tester Class
-list1 = [1, 2, 3, 4, 5]
+list1 = [3, 5, 4, 2, 1, 4]
 list2 = MyList(list1)
 list2.showlist()
-print(list2.isEmpty())
-list2.clear()
+# print(list2.isEmpty())
+# list2.clear()
+# list2.showlist()
+# print(list2.isEmpty())
+# list1 = [1, 2, 3, 4, 5]
+# list2 = MyList(list1)
+# list2.showlist()
+# list2.insert(1)
+# list2.insert(3)
+# list2.insert(6)
+# list2.showlist()
+# list2.insertAt(0, 0)
+# list2.showlist()
+# list2.insertAt(0, 2)
+# list2.showlist()
+# list2.insertAt(16, 2)
+# list2.showlist()
+# list2.remove(2)
+# list2.showlist()
+# even = list2.even()
+# even.showlist()
+# print(list2.find(4))
+# even.reverse()
+# even.showlist()
+# print(even.sum())
+# print(even.count())
+# even.leftRotate()
+# even.showlist()
+# even.rightRotate()
+# even.showlist()
+# list3 = [3, 2, 5, 1, 8]
+# list4 = MyList(list3)
+# list4.showlist()
+# list4.rotate('right', 2)
+# list4.showlist()
+# list4.rotate('left', 2)
+# list4.showlist()
+list2.sort()
 list2.showlist()
-print(list2.isEmpty())
-list1 = [1, 2, 3, 4, 5]
-list2 = MyList(list1)
-list2.showlist()
-list2.insert(1)
-list2.insert(3)
-list2.insert(6)
-list2.showlist()
-list2.insertAt(0, 0)
-list2.showlist()
-list2.insertAt(0, 2)
-list2.showlist()
-list2.insertAt(16, 2)
-list2.showlist()
-list2.remove(2)
-list2.showlist()
-even = list2.even()
-even.showlist()
-print(list2.find(4))
-even.reverse()
-even.showlist()
-print(even.sum())
