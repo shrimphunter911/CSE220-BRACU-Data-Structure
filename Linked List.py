@@ -154,6 +154,8 @@ class LinkedList:
       temp = temp.next
 
     last.next = None
+
+
 # Tester Class
 # list1 = [1, 2, 3, 4, 5]
 # list2 = LinkedList()

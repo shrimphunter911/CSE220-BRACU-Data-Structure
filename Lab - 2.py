@@ -191,6 +191,7 @@ class MyList:
         while node is not None:
             n = node.next
             c = node.elem
+            at = None
             while n is not None:
                 if n.elem <= c:
                     c = n.elem
@@ -202,6 +203,18 @@ class MyList:
                 x = self.nodeAt(at)
                 x.elem = temp
             node = node.next
+
+    def sort_list(self):
+        n = self.head
+        while (n!=None):
+            m = self.head
+            while (m!=None):
+                if n.elem < m.elem:
+                    w = n.elem
+                    n.elem = m.elem
+                    m.elem = w
+                m = m.next
+            n = n.next
 
 
 # Tester Class
@@ -245,5 +258,7 @@ list2.showlist()
 # list4.showlist()
 # list4.rotate('left', 2)
 # list4.showlist()
-list2.sort()
+# list2.sort()
+# list2.showlist()
+list2.sort_list()
 list2.showlist()
